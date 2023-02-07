@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EmployeeControllerImpl implements EmployeeController {
@@ -24,14 +23,13 @@ public class EmployeeControllerImpl implements EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public Optional<Employee> findById(@PathVariable("id") Integer id) {
-        return employeeRepository.findById(id);
+    public Employee findById(@PathVariable(name = "id") Integer id) {
+        return employeeRepository.findById(id).get();
     }
 
-    @GetMapping("/employees/{status}")
-    public Optional<Employee> findByStatus(@PathVariable("status")EmployeeStatus status){
-//        return employeeRepository.findBy(EmployeeStatus.valueOf("status"));
-        return null;
+    @GetMapping("/employees/status/{status}")
+    public List<Employee> findByStatus(@PathVariable("status")EmployeeStatus status){
+        return employeeRepository.findByEmployeeStatus(status);
     }
 
 }
