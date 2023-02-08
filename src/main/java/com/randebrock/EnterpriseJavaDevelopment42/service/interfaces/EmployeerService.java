@@ -13,4 +13,5 @@ public interface EmployeerService {
 //    void updateEmployeesStatus(Integer id, Enum status, EmployeeStatusDTO employeeStatusDTO);
 
     void updateEmployeesStatus(Integer id, EmployeeStatusDTO employeeStatusDTO);
+    void updateDepartment(String department, Employee employee);
 }
