@@ -24,11 +24,4 @@ public interface EmployeeController {
 
 /*
 Create a route to change a doctor’s status.
-
-
-
-
-Create a route to update patient’s information (the user should be able to
-update any patient information through this route).
-
 */
