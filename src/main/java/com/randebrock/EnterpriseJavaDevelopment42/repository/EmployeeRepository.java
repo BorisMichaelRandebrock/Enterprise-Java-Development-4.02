@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findByEmployeeStatus(EmployeeStatus status);
+
+    Employee save(Employee employee);
 }
