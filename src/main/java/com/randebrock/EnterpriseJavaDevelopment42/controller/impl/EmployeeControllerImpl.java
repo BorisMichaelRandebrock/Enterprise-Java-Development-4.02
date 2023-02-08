@@ -66,6 +66,21 @@ public class EmployeeControllerImpl implements EmployeeController {
         employeerService.updateEmployeesStatus(id, employeeStatusDTO);
     }
 
+    @PutMapping("/employees/department/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateDepartment(@PathVariable String id, @RequestBody @Valid Employee employee) {
+        employeerService.updateDepartment(id, employee);
+    }
+
+    /*
+    *  @PutMapping("/courses/{code}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 Everything salio bien, no te devuelvo nada :D
+    public void updateDepartment(@PathVariable String code, @RequestBody @Valid Course course) {
+        // Toda la lógica de negocio fue movida al SERVICIO
+        courserService.update(code, course);
+    }
+    * */
+
 //    @Override  .updateStatus(id, employeeStatusDTO);
 //    public void updateEmployeesStatus(Integer id, Enum status, EmployeeStatusDTO employeeStatusDTO) {
 //        Optional<Employee> optionalEmployee = employeeRepository.findById(id);

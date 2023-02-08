@@ -18,11 +18,16 @@ public interface EmployeeController {
 
     void updateEmployeesStatus(Integer id,/* Enum status,*/ EmployeeStatusDTO employeeStatusDTO);
 
+    void updateDepartment(String department, Employee employee);
+
 }
 
 /*
 Create a route to change a doctor’s status.
-Create a route to update a doctor’s department.
+
+
+
+
 Create a route to update patient’s information (the user should be able to
 update any patient information through this route).
 
