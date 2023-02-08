@@ -5,14 +5,13 @@ import com.randebrock.EnterpriseJavaDevelopment42.controller.interfaces.Employee
 import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
 import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
 import com.randebrock.EnterpriseJavaDevelopment42.repository.EmployeeRepository;
-import com.randebrock.EnterpriseJavaDevelopment42.service.interfaces.EmployeerService;
+import com.randebrock.EnterpriseJavaDevelopment42.service.interfaces.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EmployeeControllerImpl implements EmployeeController {
@@ -21,7 +20,7 @@ public class EmployeeControllerImpl implements EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private EmployeerService employeerService;
+    private EmployeeService employeerService;
 
 
 
@@ -72,18 +71,5 @@ public class EmployeeControllerImpl implements EmployeeController {
         employeerService.updateDepartment(id, employee);
     }
 
-    /*
-    *  @PutMapping("/courses/{code}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 Everything salio bien, no te devuelvo nada :D
-    public void updateDepartment(@PathVariable String code, @RequestBody @Valid Course course) {
-        // Toda la lógica de negocio fue movida al SERVICIO
-        courserService.update(code, course);
-    }
-    * */
-
-//    @Override  .updateStatus(id, employeeStatusDTO);
-//    public void updateEmployeesStatus(Integer id, Enum status, EmployeeStatusDTO employeeStatusDTO) {
-//        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-//    }
 
 }

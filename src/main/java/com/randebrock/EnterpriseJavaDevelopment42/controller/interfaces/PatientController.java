@@ -1,16 +1,11 @@
 package com.randebrock.EnterpriseJavaDevelopment42.controller.interfaces;
 
-import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
-import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
 import com.randebrock.EnterpriseJavaDevelopment42.model.Patient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-
+@RestController
 public interface PatientController {
     List<Patient> findAll();
 
@@ -24,5 +19,5 @@ public interface PatientController {
 
     List<Patient> getByAdmittedByEmployeeStatus();
 
-
+    void updatePatientsInformation(Integer id, Patient patient);
 }

@@ -2,24 +2,25 @@ package com.randebrock.EnterpriseJavaDevelopment42.controller.impl;
 
 import com.randebrock.EnterpriseJavaDevelopment42.controller.interfaces.PatientController;
 import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
-import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
 import com.randebrock.EnterpriseJavaDevelopment42.model.Patient;
 import com.randebrock.EnterpriseJavaDevelopment42.repository.PatientRepository;
+import com.randebrock.EnterpriseJavaDevelopment42.service.interfaces.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 public class PatientControllerImpl implements PatientController {
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private PatientService patientService;
+
     @GetMapping("/patients")
     public List<Patient> findAll() {
         return patientRepository.findAll();
@@ -51,12 +52,12 @@ public class PatientControllerImpl implements PatientController {
         return patientRepository.findByAdmittedByEmployeeStatus(EmployeeStatus.OFF);
     }
 
-    /*
-    *   @GetMapping("/patients/admittedByStatus")
-    public List<Patient> getByAdmittedByEmployeeStatus() {
-        return patientRepository.findByAdmittedByEmployeeStatus(@RequestBody EmployeeStatus empployeeStatus);
+    @PutMapping("/patients/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePatientsInformation(@PathVariable Integer id, @RequestBody @Valid Patient patient) {
+        patientService.updatePatientsInformation(id, patient);
     }
-    * */
+
 
 
 }
