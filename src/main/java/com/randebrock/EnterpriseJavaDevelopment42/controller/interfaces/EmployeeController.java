@@ -1,5 +1,6 @@
 package com.randebrock.EnterpriseJavaDevelopment42.controller.interfaces;
 
+import com.randebrock.EnterpriseJavaDevelopment42.controller.dto.EmployeeDepartmentDTO;
 import com.randebrock.EnterpriseJavaDevelopment42.controller.dto.EmployeeStatusDTO;
 import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
 import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
@@ -14,11 +15,11 @@ public interface EmployeeController {
     List<Employee> findByStatus(EmployeeStatus status);
 
     Employee addNewEmployee(Employee employee);
-    void addAnotherEmployee(Employee employee);
+//    void addAnotherEmployee(Employee employee);
 
     void updateEmployeesStatus(Integer id,/* Enum status,*/ EmployeeStatusDTO employeeStatusDTO);
 
-    void updateDepartment(String department, Employee employee);
+    void updateDepartment(Integer id , EmployeeDepartmentDTO department);
 
 }
 
