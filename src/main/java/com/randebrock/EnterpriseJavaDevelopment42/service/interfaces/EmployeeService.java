@@ -7,5 +7,5 @@ import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
 public interface EmployeeService {
 
     void updateEmployeesStatus(Integer id, EmployeeStatusDTO employeeStatusDTO);
-    void updateDepartment(String department, Employee employee);
+    void updateDepartment(Integer id, String department);
 }

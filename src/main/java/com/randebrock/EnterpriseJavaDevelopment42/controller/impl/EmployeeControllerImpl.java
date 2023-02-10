@@ -1,5 +1,6 @@
 package com.randebrock.EnterpriseJavaDevelopment42.controller.impl;
 
+import com.randebrock.EnterpriseJavaDevelopment42.controller.dto.EmployeeDepartmentDTO;
 import com.randebrock.EnterpriseJavaDevelopment42.controller.dto.EmployeeStatusDTO;
 import com.randebrock.EnterpriseJavaDevelopment42.controller.interfaces.EmployeeController;
 import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
@@ -45,20 +46,23 @@ public class EmployeeControllerImpl implements EmployeeController {
         return employeeRepository.save(employee);
     }
 
-    @PostMapping("employee-add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addAnotherEmployee(@RequestBody @Valid Employee employee) {
-        employeeRepository.save(employee);
-//        employeerService.save(employee);
+//    @PostMapping("employees/{employee}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void addAnotherEmployee(@RequestBody @Valid Employee employee) {
+//        employeeRepository.save(employee);
+////        employeerService.save(employee);
+//
+//    }
 
-    }
 
-   /* @Override
-    public void updateEmployeesStatus(Integer id, Enum status, EmployeeStatusDTO employeeStatusDTO) {
+//    @PatchMapping("/employees/{id}/status")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void updateEmployeesStatus(@PathVariable Integer id, @RequestBody @Valid EmployeeStatusDTO employeeStatusDTO) {
+//
+//        employeerService.updateEmployeesStatus(id, employeeStatusDTO);
+//    }
 
-    }*/
-
-    @PatchMapping("/employees/{id}/status")
+    @PatchMapping("/employees/status/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateEmployeesStatus(@PathVariable Integer id, @RequestBody @Valid EmployeeStatusDTO employeeStatusDTO) {
 
@@ -67,9 +71,8 @@ public class EmployeeControllerImpl implements EmployeeController {
 
     @PutMapping("/employees/department/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateDepartment(@PathVariable String id, @RequestBody @Valid Employee employee) {
-        employeerService.updateDepartment(id, employee);
+    public void updateDepartment(@PathVariable Integer id, @RequestBody @Valid EmployeeDepartmentDTO department) {
+        employeerService.updateDepartment(id, department.getDepartment());
     }
-
 
 }

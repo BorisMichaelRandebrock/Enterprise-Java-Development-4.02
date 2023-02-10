@@ -6,7 +6,9 @@ import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
 import com.randebrock.EnterpriseJavaDevelopment42.repository.EmployeeRepository;
 import com.randebrock.EnterpriseJavaDevelopment42.service.interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -16,14 +18,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Override
-    public void updateEmployeesStatus(Integer id, /*Enum status,*/ EmployeeStatusDTO employeeStatusDTO) {
+    public void updateEmployeesStatus(Integer id,  EmployeeStatusDTO employeeStatusDTO) {
+
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        optionalEmployee.get().setAdmitted_by(employeeStatusDTO.getStatus());
+        employeeRepository.save(optionalEmployee.get());
     }
 
     @Override
-    public void updateDepartment(String department, Employee employee) {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employee.getId());
-       employeeRepository.save(employee);
+    public void updateDepartment(Integer id, String department) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (!optionalEmployee.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This employee is not found.. :(");
+        } else {
+        Employee employeeUpdated = optionalEmployee.get();
+            employeeUpdated.setDepartment(department);
+       employeeRepository.save(employeeUpdated);
+        }
     }
 
 }

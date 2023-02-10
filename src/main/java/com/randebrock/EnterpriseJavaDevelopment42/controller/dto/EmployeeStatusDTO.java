@@ -1,17 +1,18 @@
 package com.randebrock.EnterpriseJavaDevelopment42.controller.dto;
 
+import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class EmployeeStatusDTO {
-    @NotEmpty(message = "The status cannot be empty")
-    private Enum status;
+    @NotNull(message = "The status cannot be empty")
+    private EmployeeStatus status;
 
-    public Enum getStatus() {
+    public EmployeeStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Enum status) {
+    public void setStatus(EmployeeStatus status) {
         this.status = status;
     }
-
 }
