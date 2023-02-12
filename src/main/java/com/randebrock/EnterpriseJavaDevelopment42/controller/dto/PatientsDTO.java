@@ -1,12 +1,14 @@
-package com.randebrock.EnterpriseJavaDevelopment42.model;
+package com.randebrock.EnterpriseJavaDevelopment42.controller.dto;
 
+import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
+import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
+import com.randebrock.EnterpriseJavaDevelopment42.model.Patient;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
-@Entity
-public class Patient {
+public class PatientsDTO {
     @Id
     @Column(name = "patient_id")
     private Integer id;
@@ -18,23 +20,6 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name = "admitted_by")
     private Employee admittedBy;
-
-    public Patient() {
-    }
-
-    public Patient(Integer id, String name, Employee admittedBy) {
-        this.id = id;
-        this.name = name;
-        this.admittedBy = admittedBy;
-    }
-
-    public Patient(Integer id, String name, LocalDate birthday, Employee admittedBy) {
-        this.id = id;
-        this.name = name;
-        this.birthday = birthday;
-        this.admittedBy = admittedBy;
-    }
-
 
     public Integer getId() {
         return id;
