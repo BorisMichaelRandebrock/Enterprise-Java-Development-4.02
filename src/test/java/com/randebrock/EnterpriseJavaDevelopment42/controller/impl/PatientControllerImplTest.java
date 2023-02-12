@@ -122,7 +122,7 @@ class PatientControllerImplTest {
     }
 
     @Test
-    void addNewPatient() throws Exception {
+    void addNewPatient_AddNewPatient_FindsNewPatient() throws Exception {
         LocalDate pepa = LocalDate.of(2011,02,02);
 
         patient3 = new Patient(5235434, "Pepa Pig",null, employee1);
@@ -149,7 +149,7 @@ class PatientControllerImplTest {
     }
 
     @Test
-    void getByAdmittedByDepartment() throws Exception {
+    void getByAdmittedByDepartment_DontKnowWhatsWrong() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/patients/admittedByDepartment/cardiology"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -161,7 +161,7 @@ class PatientControllerImplTest {
 
         }
     @Test
-    void updatePatientsInformation() throws Exception {
+    void updatePatientsInformation_AddingNewPatientName_ChangesPatientsName() throws Exception {
         ///patients/{id}
 //        EmployeeDepartmentDTO employeeDepartmentDTO = new EmployeeDepartmentDTO();
 //        employeeDepartmentDTO.setDepartment("pulmonary");

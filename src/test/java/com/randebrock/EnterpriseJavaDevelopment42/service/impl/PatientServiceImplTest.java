@@ -91,4 +91,25 @@ class PatientServiceImplTest {
 
 
     }
+
+    @Test
+    void testUpdatePatientsInformation() throws Exception {
+        System.out.println("-------------->" + patient1.getName());
+        patient1.setName("The Dorian Grey...! not pepa pig");
+        patient1.setBirthday(null);
+        String body =  objectMapper.writeValueAsString(patient1);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        put("/patients/" + patient1.getId())
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+
+        assertTrue(patientRepository.existsById(patient1.getId()));
+        assertEquals("The Dorian Grey...! not pepa pig",patientRepository.findById(patient1.getId()).get().getName());
+
+    }
 }
