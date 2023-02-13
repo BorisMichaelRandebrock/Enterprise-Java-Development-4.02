@@ -52,12 +52,10 @@ public class PatientControllerImpl implements PatientController {
         return patientRepository.findByAdmittedByEmployeeStatus(EmployeeStatus.OFF);
     }
 
+
     @PutMapping("/patients/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePatientsInformation(@PathVariable Integer id, @RequestBody @Valid Patient patient) {
         patientService.updatePatientsInformation(id, patient);
     }
-
-
-
 }

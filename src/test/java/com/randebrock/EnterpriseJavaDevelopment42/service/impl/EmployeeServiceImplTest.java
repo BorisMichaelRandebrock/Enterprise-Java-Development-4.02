@@ -103,24 +103,14 @@ class EmployeeServiceImplTest {
         String body =  objectMapper.writeValueAsString(employeeDepartmentDTO);
 
         MvcResult mvcResult = mockMvc.perform(
-                        put("/employees/department/" )
+                        put("/employees/department/1234677890" )
                                 .content(body)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isNotFound())
                 .andReturn();
-
-
-//        System.out.println(employee4.getDepartment());
-//        assertThrows(new ResponseStatusException(HttpStatus.NOT_FOUND, "This employee is not found.. :("));
-//        assertThrows(new ResponseStatusException(HttpStatus.NOT_FOUND), ()-> mvcResult.getResponse().getContentType().contains("This employee is not found.. :("));
-//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertEquals(null,mvcResult.getResponse().getContentType() );
-
-//        assertEquals(HttpStatus.NOT_FOUND,mvcResult.getResponse().getContentType() );
-//        assertThat(response.getBody()).isEqualTo(xxxxx);
-//        assertFalse(employeeRepository.existsById(employee4.getId()));
-//        assertEquals("pulmonary",employeeRepository.findById(456).get().getDepartment());
+        assertTrue(mvcResult.getResolvedException().getMessage().contains("Employee"));
+        assertEquals("Employee not found", mvcResult.getResponse().getErrorMessage());
 
     }
 }

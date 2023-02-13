@@ -1,6 +1,7 @@
 package com.randebrock.EnterpriseJavaDevelopment42.controller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.randebrock.EnterpriseJavaDevelopment42.controller.dto.EmployeeDepartmentDTO;
 import com.randebrock.EnterpriseJavaDevelopment42.enums.EmployeeStatus;
 import com.randebrock.EnterpriseJavaDevelopment42.model.Employee;
@@ -36,6 +37,10 @@ class PatientControllerImplTest {
     @Autowired
     private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+//
+    private JavaTimeModule module = new JavaTimeModule();
+
 
     private Employee employee1, employee2;
     private Patient patient1, patient2, patient3;
@@ -103,13 +108,12 @@ class PatientControllerImplTest {
             assertTrue(mvcResult.getResponse().getContentAsString().contains("Donald"));
             assertFalse(mvcResult.getResponse().getContentAsString().contains("Iñigo Montoya"));
 
-
         }
 
 
 
     @Test
-    void getByAdmittedByEmployeeStatus_EnteringAdmittedStatusOff_FindsPatientAdmittedByEmployeeWithSTatsusOff() throws Exception {
+    void getByAdmittedByEmployeeStatus_EnteringAdmittedStatusOff_FindsPatientAdmittedByEmployeeWithStatusOff() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/patients/admittedByStatusOFF"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -125,7 +129,9 @@ class PatientControllerImplTest {
     void addNewPatient_AddNewPatient_FindsNewPatient() throws Exception {
         LocalDate pepa = LocalDate.of(2011,02,02);
 
-        patient3 = new Patient(5235434, "Pepa Pig",null, employee1);
+        patient3 = new Patient(5235434, "Pepa Pig",pepa, employee1);
+        objectMapper.registerModule(module);
+
         System.out.println(patient3.getBirthday());
         System.out.println(patient3.getName() + " "+patient3.getId() + " " + patient3.getAdmittedBy().getName());
         String body = objectMapper.writeValueAsString(patient3);
