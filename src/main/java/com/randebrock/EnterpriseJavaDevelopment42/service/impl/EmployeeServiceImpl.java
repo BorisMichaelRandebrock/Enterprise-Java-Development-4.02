@@ -27,14 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateDepartment(Integer id, String department) {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-        if (!optionalEmployee.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This employee is not found.. :(");
-        } else {
-        Employee employeeUpdated = optionalEmployee.get();
-            employeeUpdated.setDepartment(department);
-       employeeRepository.save(employeeUpdated);
+            Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found"));
+            employee.setDepartment(department);
+       employeeRepository.save(employee);
         }
-    }
-
 }

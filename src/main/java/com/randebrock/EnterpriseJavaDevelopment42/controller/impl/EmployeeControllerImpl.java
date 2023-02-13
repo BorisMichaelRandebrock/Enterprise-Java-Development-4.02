@@ -36,9 +36,11 @@ public class EmployeeControllerImpl implements EmployeeController {
     }
 
     @GetMapping("/employees/status/{status}")
+//    @ResponseStatus(HttpStatus.OK)
     public List<Employee> findByStatus(@PathVariable("status")EmployeeStatus status){
         return employeeRepository.findByEmployeeStatus(status);
     }
+
 
     @PostMapping("employees")
     @ResponseStatus(HttpStatus.CREATED)
@@ -53,6 +55,7 @@ public class EmployeeControllerImpl implements EmployeeController {
 ////        employeerService.save(employee);
 //
 //    }
+
 
 
 //    @PatchMapping("/employees/{id}/status")
